@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-book - Profesjonalne Pakiety</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://js.stripe.com/v3/"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
         body { font-family: 'Inter', sans-serif; }
@@ -15,6 +16,20 @@
         .premium-card { background: linear-gradient(145deg, #000000 0%, #1f1f1f 100%); }
         .feature-icon { background: linear-gradient(135deg, #000000 0%, #333333 100%); }
         .scroll-smooth { scroll-behavior: smooth; }
+        .stripe-button { position: relative; overflow: hidden; }
+        .stripe-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        .stripe-button:hover::before {
+            left: 100%;
+        }
     </style>
 </head>
 <body class="bg-gray-50 scroll-smooth">
@@ -30,9 +45,6 @@
                         <a href="#funkcje" class="text-gray-700 hover:text-black px-3 py-2 text-sm font-medium transition-colors">Funkcje</a>
                         <a href="#cennik" class="text-gray-700 hover:text-black px-3 py-2 text-sm font-medium transition-colors">Cennik</a>
                         <a href="#faq" class="text-gray-700 hover:text-black px-3 py-2 text-sm font-medium transition-colors">FAQ</a>
-                        <button onclick="toggleEditMode()" id="edit-toggle" class="bg-black text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors">
-                            ✏️ Tryb Edycji
-                        </button>
                     </div>
                 </div>
                 <div class="md:hidden">
@@ -50,7 +62,6 @@
                 <a href="#funkcje" class="block px-3 py-2 text-gray-700 hover:text-black">Funkcje</a>
                 <a href="#cennik" class="block px-3 py-2 text-gray-700 hover:text-black">Cennik</a>
                 <a href="#faq" class="block px-3 py-2 text-gray-700 hover:text-black">FAQ</a>
-                <button onclick="toggleEditMode()" class="block w-full text-left px-3 py-2 text-black font-medium">✏️ Tryb Edycji</button>
             </div>
         </div>
     </nav>
@@ -76,7 +87,7 @@
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-bold text-gray-900 mb-4">⚡ Funkcje E-booka</h2>
                 <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-                    Odkryj wszystkie możliwości, które oferuje nasze pakiety
+                    Odkryj wszystkie możliwości, które oferuje nasz e-book
                 </p>
             </div>
             
@@ -146,84 +157,88 @@
                 <p class="text-xl text-gray-600 max-w-2xl mx-auto">
                     Dostosowane opcje dla każdego poziomu zaawansowania i budżetu
                 </p>
+                <div class="mt-6 flex items-center justify-center space-x-2">
+                    <span class="text-sm text-gray-500">Bezpieczne płatności przez</span>
+                    <svg class="h-6 w-20" viewBox="0 0 60 25" fill="none">
+                        <path d="M59.64 14.28h-8.06c.19 1.93 1.6 2.55 3.2 2.55 1.64 0 2.96-.37 4.05-.95v3.32a8.33 8.33 0 0 1-4.56 1.1c-4.01 0-6.83-2.5-6.83-7.48 0-4.19 2.39-7.52 6.3-7.52 3.92 0 5.96 3.28 5.96 7.5 0 .4-.04.86-.06 1.48zm-5.92-5.62c-1.03 0-2.17.73-2.17 2.58h4.25c0-1.85-1.07-2.58-2.08-2.58zM40.95 20.3c-1.44 0-2.32-.6-2.9-1.04l-.02 4.63-4.12.87V5.57h3.76l.08 1.02a4.7 4.7 0 0 1 3.23-1.29c2.9 0 5.62 2.6 5.62 7.4 0 5.23-2.7 7.6-5.65 7.6zM40 8.95c-.95 0-1.54.34-1.97.81l.02 6.12c.4.44.98.78 1.95.78 1.52 0 2.54-1.65 2.54-3.87 0-2.15-1.04-3.84-2.54-3.84zM28.24 5.57h4.13v14.44h-4.13V5.57zm0-4.7L32.37 0v3.36l-4.13.88V.88zm-4.32 9.35v9.79H19.8V5.57h3.7l.12 1.22c1-1.77 3.07-1.41 3.62-1.22v3.79c-.52-.17-2.29-.43-3.32.86zm-8.55 4.72c0 2.43 2.6 1.68 3.12 1.46v3.36c-.55.3-1.54.54-2.89.54a4.15 4.15 0 0 1-4.27-4.24l.01-13.17 4.02-.86v3.54h3.14V9.1h-3.13v5.85zm-8.78.85c0 2.77-2.01 4.41-5.42 4.41-2.03 0-3.93-.6-5.16-1.44l1.08-3.12c1.03.69 2.58 1.15 3.89 1.15 1.03 0 1.65-.44 1.65-1.15s-.45-1.04-2.19-1.2c-3.46-.31-4.86-2.29-4.86-4.72 0-2.75 2.74-4.67 5.54-4.67 2.24 0 3.8.53 4.84 1.11L8.95 8.4a7.09 7.09 0 0 0-3.27-.82c-.93 0-1.65.39-1.65 1.03s.34.98 1.9 1.06c3.68.2 4.84 2.12 4.84 4.69z" fill="#635BFF"/>
+                    </svg>
+                </div>
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
                 <!-- Pakiet Starter -->
                 <div class="pricing-card rounded-2xl p-8 border border-gray-200 card-hover relative" id="package-starter">
-                    <!-- Edit Button -->
-                    <button onclick="editPackage('starter')" class="edit-btn absolute top-4 right-4 bg-yellow-500 text-white p-2 rounded-full hover:bg-yellow-600 transition-colors hidden">
-                        ✏️
-                    </button>
-                    
                     <div class="text-center">
-                        <h3 class="text-xl font-bold text-gray-900 mb-2 editable" data-field="title">🌱 Starter</h3>
-                        <div class="text-3xl font-bold text-blue-600 mb-4 editable" data-field="price">49 zł</div>
-                        <p class="text-gray-600 mb-6 editable" data-field="description">Idealne na początek</p>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">🌱 Starter</h3>
+                        <div class="text-3xl font-bold text-blue-600 mb-4">49 zł</div>
+                        <p class="text-gray-600 mb-6">Idealne na początek</p>
                         
-                        <ul class="text-left space-y-3 mb-8" id="features-starter">
+                        <ul class="text-left space-y-3 mb-8">
                             <li class="flex items-center text-sm">
                                 <span class="text-green-500 mr-2">✓</span>
-                                <span class="editable" data-field="feature1">E-book podstawowy (100 stron)</span>
+                                <span>E-book podstawowy (100 stron)</span>
                             </li>
                             <li class="flex items-center text-sm">
                                 <span class="text-green-500 mr-2">✓</span>
-                                <span class="editable" data-field="feature2">5 ćwiczeń praktycznych</span>
+                                <span>5 ćwiczeń praktycznych</span>
                             </li>
                             <li class="flex items-center text-sm">
                                 <span class="text-green-500 mr-2">✓</span>
-                                <span class="editable" data-field="feature3">Dostęp na 6 miesięcy</span>
+                                <span>Dostęp na 6 miesięcy</span>
                             </li>
                             <li class="flex items-center text-sm">
                                 <span class="text-green-500 mr-2">✓</span>
-                                <span class="editable" data-field="feature4">Wsparcie email</span>
+                                <span>Wsparcie email</span>
                             </li>
                         </ul>
                         
-                        <button onclick="redirectToPayment('starter')" class="w-full bg-black text-white py-3 px-6 rounded-lg font-semibold hover:bg-gray-800 transform hover:scale-105 transition-all duration-200">
-                            Wybieram Starter
+                        <button onclick="buyPackage('price_1QRmVKP123456789starter')" class="stripe-button w-full bg-black text-white py-3 px-6 rounded-lg font-semibold hover:bg-gray-800 transform hover:scale-105 transition-all duration-200 flex items-center justify-center">
+                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4zM18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"/>
+                            </svg>
+                            Kup teraz - 49 zł
                         </button>
+                        <p class="text-xs text-gray-500 mt-2">Bezpieczna płatność przez Stripe</p>
                     </div>
                 </div>
 
                 <!-- Pakiet Standard -->
                 <div class="pricing-card rounded-2xl p-8 border border-gray-200 card-hover relative" id="package-standard">
-                    <!-- Edit Button -->
-                    <button onclick="editPackage('standard')" class="edit-btn absolute top-4 right-4 bg-yellow-500 text-white p-2 rounded-full hover:bg-yellow-600 transition-colors hidden">
-                        ✏️
-                    </button>
-                    
                     <div class="text-center">
-                        <h3 class="text-xl font-bold text-gray-900 mb-2 editable" data-field="title">⭐ Standard</h3>
-                        <div class="text-3xl font-bold text-blue-600 mb-4 editable" data-field="price">99 zł</div>
-                        <p class="text-gray-600 mb-6 editable" data-field="description">Najpopularniejszy wybór</p>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">⭐ Standard</h3>
+                        <div class="text-3xl font-bold text-blue-600 mb-4">99 zł</div>
+                        <p class="text-gray-600 mb-6">Najpopularniejszy wybór</p>
                         
-                        <ul class="text-left space-y-3 mb-8" id="features-standard">
+                        <ul class="text-left space-y-3 mb-8">
                             <li class="flex items-center text-sm">
                                 <span class="text-green-500 mr-2">✓</span>
-                                <span class="editable" data-field="feature1">E-book rozszerzony (200 stron)</span>
+                                <span>E-book rozszerzony (200 stron)</span>
                             </li>
                             <li class="flex items-center text-sm">
                                 <span class="text-green-500 mr-2">✓</span>
-                                <span class="editable" data-field="feature2">15 ćwiczeń + quizy</span>
+                                <span>15 ćwiczeń + quizy</span>
                             </li>
                             <li class="flex items-center text-sm">
                                 <span class="text-green-500 mr-2">✓</span>
-                                <span class="editable" data-field="feature3">Dostęp na 12 miesięcy</span>
+                                <span>Dostęp na 12 miesięcy</span>
                             </li>
                             <li class="flex items-center text-sm">
                                 <span class="text-green-500 mr-2">✓</span>
-                                <span class="editable" data-field="feature4">Wsparcie priorytetowe</span>
+                                <span>Wsparcie priorytetowe</span>
                             </li>
                             <li class="flex items-center text-sm">
                                 <span class="text-green-500 mr-2">✓</span>
-                                <span class="editable" data-field="feature5">Bonus: 3 webinary</span>
+                                <span>Bonus: 3 webinary</span>
                             </li>
                         </ul>
                         
-                        <button onclick="redirectToPayment('standard')" class="w-full bg-black text-white py-3 px-6 rounded-lg font-semibold hover:bg-gray-800 transform hover:scale-105 transition-all duration-200">
-                            Wybieram Standard
+                        <button onclick="buyPackage('price_1QRmVKP123456789standard')" class="stripe-button w-full bg-black text-white py-3 px-6 rounded-lg font-semibold hover:bg-gray-800 transform hover:scale-105 transition-all duration-200 flex items-center justify-center">
+                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4zM18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"/>
+                            </svg>
+                            Kup teraz - 99 zł
                         </button>
+                        <p class="text-xs text-gray-500 mt-2">Bezpieczna płatność przez Stripe</p>
                     </div>
                     <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-orange-500 text-white px-4 py-1 rounded-full text-xs font-semibold">
                         POPULARNE
@@ -232,46 +247,45 @@
 
                 <!-- Pakiet Premium -->
                 <div class="premium-card rounded-2xl p-8 border-2 border-blue-500 card-hover relative text-white" id="package-premium">
-                    <!-- Edit Button -->
-                    <button onclick="editPackage('premium')" class="edit-btn absolute top-4 right-4 bg-yellow-500 text-white p-2 rounded-full hover:bg-yellow-600 transition-colors hidden">
-                        ✏️
-                    </button>
-                    
                     <div class="text-center">
-                        <h3 class="text-xl font-bold mb-2 editable" data-field="title">💎 Premium</h3>
-                        <div class="text-3xl font-bold mb-4 editable" data-field="price">199 zł</div>
-                        <p class="text-blue-100 mb-6 editable" data-field="description">Dla wymagających</p>
+                        <h3 class="text-xl font-bold mb-2">💎 Premium</h3>
+                        <div class="text-3xl font-bold mb-4">199 zł</div>
+                        <p class="text-blue-100 mb-6">Dla wymagających</p>
                         
-                        <ul class="text-left space-y-3 mb-8" id="features-premium">
+                        <ul class="text-left space-y-3 mb-8">
                             <li class="flex items-center text-sm">
                                 <span class="text-yellow-300 mr-2">✓</span>
-                                <span class="editable" data-field="feature1">E-book kompletny (350 stron)</span>
+                                <span>E-book kompletny (350 stron)</span>
                             </li>
                             <li class="flex items-center text-sm">
                                 <span class="text-yellow-300 mr-2">✓</span>
-                                <span class="editable" data-field="feature2">30 ćwiczeń + projekty</span>
+                                <span>30 ćwiczeń + projekty</span>
                             </li>
                             <li class="flex items-center text-sm">
                                 <span class="text-yellow-300 mr-2">✓</span>
-                                <span class="editable" data-field="feature3">Dostęp dożywotni</span>
+                                <span>Dostęp dożywotni</span>
                             </li>
                             <li class="flex items-center text-sm">
                                 <span class="text-yellow-300 mr-2">✓</span>
-                                <span class="editable" data-field="feature4">Wsparcie 1-na-1</span>
+                                <span>Wsparcie 1-na-1</span>
                             </li>
                             <li class="flex items-center text-sm">
                                 <span class="text-yellow-300 mr-2">✓</span>
-                                <span class="editable" data-field="feature5">Bonus: 10 webinarów</span>
+                                <span>Bonus: 10 webinarów</span>
                             </li>
                             <li class="flex items-center text-sm">
                                 <span class="text-yellow-300 mr-2">✓</span>
-                                <span class="editable" data-field="feature6">Certyfikat ukończenia</span>
+                                <span>Certyfikat ukończenia</span>
                             </li>
                         </ul>
                         
-                        <button onclick="redirectToPayment('premium')" class="w-full bg-white text-black py-3 px-6 rounded-lg font-semibold hover:bg-gray-100 transform hover:scale-105 transition-all duration-200">
-                            Wybieram Premium
+                        <button onclick="buyPackage('price_1QRmVKP123456789premium')" class="stripe-button w-full bg-white text-black py-3 px-6 rounded-lg font-semibold hover:bg-gray-100 transform hover:scale-105 transition-all duration-200 flex items-center justify-center">
+                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4zM18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"/>
+                            </svg>
+                            Kup teraz - 199 zł
                         </button>
+                        <p class="text-xs text-blue-100 mt-2">Bezpieczna płatność przez Stripe</p>
                     </div>
                     <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-yellow-500 text-black px-4 py-1 rounded-full text-xs font-semibold">
                         NAJLEPSZA WARTOŚĆ
@@ -280,83 +294,81 @@
 
                 <!-- Pakiet Business -->
                 <div class="pricing-card rounded-2xl p-8 border border-gray-200 card-hover relative" id="package-business">
-                    <!-- Edit Button -->
-                    <button onclick="editPackage('business')" class="edit-btn absolute top-4 right-4 bg-yellow-500 text-white p-2 rounded-full hover:bg-yellow-600 transition-colors hidden">
-                        ✏️
-                    </button>
-                    
                     <div class="text-center">
-                        <h3 class="text-xl font-bold text-gray-900 mb-2 editable" data-field="title">🏢 Business</h3>
-                        <div class="text-3xl font-bold text-blue-600 mb-4 editable" data-field="price">399 zł</div>
-                        <p class="text-gray-600 mb-6 editable" data-field="description">Dla firm i zespołów</p>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">🏢 Business</h3>
+                        <div class="text-3xl font-bold text-blue-600 mb-4">399 zł</div>
+                        <p class="text-gray-600 mb-6">Dla firm i zespołów</p>
                         
-                        <ul class="text-left space-y-3 mb-8" id="features-business">
+                        <ul class="text-left space-y-3 mb-8">
                             <li class="flex items-center text-sm">
                                 <span class="text-green-500 mr-2">✓</span>
-                                <span class="editable" data-field="feature1">Wszystko z Premium</span>
+                                <span>Wszystko z Premium</span>
                             </li>
                             <li class="flex items-center text-sm">
                                 <span class="text-green-500 mr-2">✓</span>
-                                <span class="editable" data-field="feature2">Licencja dla 5 osób</span>
+                                <span>Licencja dla 5 osób</span>
                             </li>
                             <li class="flex items-center text-sm">
                                 <span class="text-green-500 mr-2">✓</span>
-                                <span class="editable" data-field="feature3">Panel administracyjny</span>
+                                <span>Panel administracyjny</span>
                             </li>
                             <li class="flex items-center text-sm">
                                 <span class="text-green-500 mr-2">✓</span>
-                                <span class="editable" data-field="feature4">Raportowanie postępów</span>
+                                <span>Raportowanie postępów</span>
                             </li>
                             <li class="flex items-center text-sm">
                                 <span class="text-green-500 mr-2">✓</span>
-                                <span class="editable" data-field="feature5">Dedykowany opiekun</span>
+                                <span>Dedykowany opiekun</span>
                             </li>
                         </ul>
                         
-                        <button onclick="redirectToPayment('business')" class="w-full bg-black text-white py-3 px-6 rounded-lg font-semibold hover:bg-gray-800 transform hover:scale-105 transition-all duration-200">
-                            Wybieram Business
+                        <button onclick="buyPackage('price_1QRmVKP123456789business')" class="stripe-button w-full bg-black text-white py-3 px-6 rounded-lg font-semibold hover:bg-gray-800 transform hover:scale-105 transition-all duration-200 flex items-center justify-center">
+                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4zM18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"/>
+                            </svg>
+                            Kup teraz - 399 zł
                         </button>
+                        <p class="text-xs text-gray-500 mt-2">Bezpieczna płatność przez Stripe</p>
                     </div>
                 </div>
 
                 <!-- Pakiet Enterprise -->
                 <div class="pricing-card rounded-2xl p-8 border border-gray-200 card-hover relative" id="package-enterprise">
-                    <!-- Edit Button -->
-                    <button onclick="editPackage('enterprise')" class="edit-btn absolute top-4 right-4 bg-yellow-500 text-white p-2 rounded-full hover:bg-yellow-600 transition-colors hidden">
-                        ✏️
-                    </button>
-                    
                     <div class="text-center">
-                        <h3 class="text-xl font-bold text-gray-900 mb-2 editable" data-field="title">🚀 Enterprise</h3>
-                        <div class="text-3xl font-bold text-blue-600 mb-4 editable" data-field="price">999 zł</div>
-                        <p class="text-gray-600 mb-6 editable" data-field="description">Rozwiązanie korporacyjne</p>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">🚀 Enterprise</h3>
+                        <div class="text-3xl font-bold text-blue-600 mb-4">999 zł</div>
+                        <p class="text-gray-600 mb-6">Rozwiązanie korporacyjne</p>
                         
-                        <ul class="text-left space-y-3 mb-8" id="features-enterprise">
+                        <ul class="text-left space-y-3 mb-8">
                             <li class="flex items-center text-sm">
                                 <span class="text-green-500 mr-2">✓</span>
-                                <span class="editable" data-field="feature1">Wszystko z Business</span>
+                                <span>Wszystko z Business</span>
                             </li>
                             <li class="flex items-center text-sm">
                                 <span class="text-green-500 mr-2">✓</span>
-                                <span class="editable" data-field="feature2">Nieograniczona liczba użytkowników</span>
+                                <span>Nieograniczona liczba użytkowników</span>
                             </li>
                             <li class="flex items-center text-sm">
                                 <span class="text-green-500 mr-2">✓</span>
-                                <span class="editable" data-field="feature3">Integracja z systemami HR</span>
+                                <span>Integracja z systemami HR</span>
                             </li>
                             <li class="flex items-center text-sm">
                                 <span class="text-green-500 mr-2">✓</span>
-                                <span class="editable" data-field="feature4">Szkolenia na miejscu</span>
+                                <span>Szkolenia na miejscu</span>
                             </li>
                             <li class="flex items-center text-sm">
                                 <span class="text-green-500 mr-2">✓</span>
-                                <span class="editable" data-field="feature5">SLA 24/7</span>
+                                <span>SLA 24/7</span>
                             </li>
                         </ul>
                         
-                        <button onclick="redirectToPayment('enterprise')" class="w-full bg-black text-white py-3 px-6 rounded-lg font-semibold hover:bg-gray-800 transform hover:scale-105 transition-all duration-200">
-                            Wybieram Enterprise
+                        <button onclick="buyPackage('price_1QRmVKP123456789enterprise')" class="stripe-button w-full bg-black text-white py-3 px-6 rounded-lg font-semibold hover:bg-gray-800 transform hover:scale-105 transition-all duration-200 flex items-center justify-center">
+                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4zM18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"/>
+                            </svg>
+                            Kup teraz - 999 zł
                         </button>
+                        <p class="text-xs text-gray-500 mt-2">Bezpieczna płatność przez Stripe</p>
                     </div>
                 </div>
             </div>
@@ -366,6 +378,15 @@
                 <div class="inline-flex items-center bg-green-100 text-green-800 px-6 py-3 rounded-full">
                     <span class="text-2xl mr-2">🛡️</span>
                     <span class="font-semibold">30-dniowa gwarancja zwrotu pieniędzy</span>
+                </div>
+                <div class="mt-4 flex items-center justify-center space-x-4 text-sm text-gray-500">
+                    <span>Akceptujemy:</span>
+                    <div class="flex space-x-2">
+                        <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded">VISA</span>
+                        <span class="px-2 py-1 bg-red-100 text-red-800 rounded">Mastercard</span>
+                        <span class="px-2 py-1 bg-green-100 text-green-800 rounded">BLIK</span>
+                        <span class="px-2 py-1 bg-purple-100 text-purple-800 rounded">Przelewy</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -411,7 +432,7 @@
                         <span id="faq-icon-3" class="text-black text-xl">+</span>
                     </button>
                     <div id="faq-content-3" class="hidden mt-4 text-gray-600">
-                        <p>Akceptujemy wszystkie popularne metody płatności: karty kredytowe/debetowe (Visa, Mastercard), BLIK, przelewy bankowe, PayPal oraz płatności mobilne. Wszystkie transakcje są w 100% bezpieczne.</p>
+                        <p>Akceptujemy wszystkie popularne metody płatności: karty kredytowe/debetowe (Visa, Mastercard), BLIK, przelewy bankowe, PayPal oraz płatności mobilne. Wszystkie transakcje są w 100% bezpieczne dzięki Stripe.</p>
                     </div>
                 </div>
 
@@ -490,181 +511,55 @@
         </div>
     </footer>
 
-    <!-- Edit Modal -->
-    <div id="edit-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
-        <div class="bg-white rounded-2xl p-8 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-bold text-gray-900">✏️ Edytuj Pakiet</h2>
-                <button onclick="closeEditModal()" class="text-gray-500 hover:text-gray-700 text-2xl">×</button>
-            </div>
-            
-            <form id="edit-form" class="space-y-6">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Nazwa pakietu</label>
-                    <input type="text" id="edit-title" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                </div>
-                
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Cena</label>
-                    <input type="text" id="edit-price" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                </div>
-                
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Opis</label>
-                    <input type="text" id="edit-description" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                </div>
-                
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Funkcje</label>
-                    <div id="edit-features" class="space-y-3">
-                        <!-- Features will be dynamically added here -->
-                    </div>
-                    <button type="button" onclick="addFeature()" class="mt-3 text-blue-600 hover:text-blue-700 text-sm font-medium">+ Dodaj funkcję</button>
-                </div>
-                
-                <div class="flex gap-4">
-                    <button type="button" onclick="savePackage()" class="flex-1 bg-black text-white py-3 px-6 rounded-lg font-semibold hover:bg-gray-800 transition-colors">
-                        💾 Zapisz zmiany
-                    </button>
-                    <button type="button" onclick="closeEditModal()" class="flex-1 bg-gray-300 text-gray-700 py-3 px-6 rounded-lg font-semibold hover:bg-gray-400 transition-colors">
-                        ❌ Anuluj
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-
     <script>
-        let isEditMode = false;
-        let currentEditPackage = null;
+        // Initialize Stripe
+        const stripe = Stripe('pk_test_51QRmVKP123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'); // ZASTĄP SWOIM KLUCZEM!
 
-        // Toggle edit mode
-        function toggleEditMode() {
-            isEditMode = !isEditMode;
-            const editButtons = document.querySelectorAll('.edit-btn');
-            const toggleButton = document.getElementById('edit-toggle');
-            
-            if (isEditMode) {
-                editButtons.forEach(btn => btn.classList.remove('hidden'));
-                toggleButton.textContent = '👁️ Tryb Podglądu';
-                toggleButton.classList.remove('bg-black', 'hover:bg-gray-800');
-                toggleButton.classList.add('bg-gray-600', 'hover:bg-gray-700');
-                
-                // Add visual indicators
-                document.querySelectorAll('.editable').forEach(el => {
-                    el.classList.add('ring-2', 'ring-yellow-300', 'ring-opacity-50');
+        // Buy package function with Stripe Checkout
+        async function buyPackage(priceId) {
+            try {
+                // Show loading state
+                const button = event.target;
+                const originalText = button.innerHTML;
+                button.innerHTML = '<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>Ładowanie...';
+                button.disabled = true;
+
+                // Redirect to Stripe Checkout
+                const { error } = await stripe.redirectToCheckout({
+                    lineItems: [{
+                        price: priceId,
+                        quantity: 1,
+                    }],
+                    mode: 'payment',
+                    successUrl: window.location.origin + '/sukces?session_id={CHECKOUT_SESSION_ID}',
+                    cancelUrl: window.location.origin + '/anulowano',
+                    locale: 'pl', // Polski język
+                    billingAddressCollection: 'required', // Wymagaj adresu do faktury
+                    shippingAddressCollection: {
+                        allowedCountries: ['PL', 'DE', 'FR', 'GB', 'US'], // Dozwolone kraje
+                    },
+                    customerEmail: null, // Pozwól klientowi wprowadzić email
+                    submitType: 'pay', // Typ przycisku
+                    allowPromotionCodes: true, // Pozwól na kody promocyjne
                 });
-            } else {
-                editButtons.forEach(btn => btn.classList.add('hidden'));
-                toggleButton.textContent = '✏️ Tryb Edycji';
-                toggleButton.classList.remove('bg-gray-600', 'hover:bg-gray-700');
-                toggleButton.classList.add('bg-black', 'hover:bg-gray-800');
-                
-                // Remove visual indicators
-                document.querySelectorAll('.editable').forEach(el => {
-                    el.classList.remove('ring-2', 'ring-yellow-300', 'ring-opacity-50');
-                });
-            }
-        }
 
-        // Edit package
-        function editPackage(packageType) {
-            currentEditPackage = packageType;
-            const packageElement = document.getElementById(`package-${packageType}`);
-            
-            // Get current values
-            const title = packageElement.querySelector('[data-field="title"]').textContent;
-            const price = packageElement.querySelector('[data-field="price"]').textContent;
-            const description = packageElement.querySelector('[data-field="description"]').textContent;
-            
-            // Fill form
-            document.getElementById('edit-title').value = title;
-            document.getElementById('edit-price').value = price;
-            document.getElementById('edit-description').value = description;
-            
-            // Get features
-            const featuresContainer = document.getElementById('edit-features');
-            featuresContainer.innerHTML = '';
-            
-            const features = packageElement.querySelectorAll('[data-field^="feature"]');
-            features.forEach((feature, index) => {
-                addFeatureInput(feature.textContent, index + 1);
-            });
-            
-            // Show modal
-            document.getElementById('edit-modal').classList.remove('hidden');
-        }
-
-        // Add feature input
-        function addFeatureInput(value = '', featureNumber = null) {
-            const featuresContainer = document.getElementById('edit-features');
-            const featureCount = featuresContainer.children.length + 1;
-            const actualNumber = featureNumber || featureCount;
-            
-            const featureDiv = document.createElement('div');
-            featureDiv.className = 'flex gap-2';
-            featureDiv.innerHTML = `
-                <input type="text" value="${value}" class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Funkcja ${actualNumber}">
-                <button type="button" onclick="removeFeature(this)" class="px-3 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors">🗑️</button>
-            `;
-            featuresContainer.appendChild(featureDiv);
-        }
-
-        // Add new feature
-        function addFeature() {
-            addFeatureInput();
-        }
-
-        // Remove feature
-        function removeFeature(button) {
-            button.parentElement.remove();
-        }
-
-        // Save package changes
-        function savePackage() {
-            if (!currentEditPackage) return;
-            
-            const packageElement = document.getElementById(`package-${currentEditPackage}`);
-            
-            // Update title
-            const title = document.getElementById('edit-title').value;
-            packageElement.querySelector('[data-field="title"]').textContent = title;
-            
-            // Update price
-            const price = document.getElementById('edit-price').value;
-            packageElement.querySelector('[data-field="price"]').textContent = price;
-            
-            // Update description
-            const description = document.getElementById('edit-description').value;
-            packageElement.querySelector('[data-field="description"]').textContent = description;
-            
-            // Update features
-            const featureInputs = document.querySelectorAll('#edit-features input');
-            const featureElements = packageElement.querySelectorAll('[data-field^="feature"]');
-            
-            featureInputs.forEach((input, index) => {
-                if (featureElements[index] && input.value.trim()) {
-                    featureElements[index].textContent = input.value.trim();
+                if (error) {
+                    console.error('Stripe error:', error);
+                    alert('Wystąpił błąd podczas przekierowania do płatności. Spróbuj ponownie.');
+                    
+                    // Restore button
+                    button.innerHTML = originalText;
+                    button.disabled = false;
                 }
-            });
-            
-            // Show success message
-            const successMsg = document.createElement('div');
-            successMsg.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
-            successMsg.textContent = '✅ Pakiet został zaktualizowany!';
-            document.body.appendChild(successMsg);
-            
-            setTimeout(() => {
-                successMsg.remove();
-            }, 3000);
-            
-            closeEditModal();
-        }
-
-        // Close edit modal
-        function closeEditModal() {
-            document.getElementById('edit-modal').classList.add('hidden');
-            currentEditPackage = null;
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Wystąpił nieoczekiwany błąd. Spróbuj ponownie.');
+                
+                // Restore button
+                const button = event.target;
+                button.innerHTML = button.getAttribute('data-original-text') || 'Kup teraz';
+                button.disabled = false;
+            }
         }
 
         // Mobile menu toggle
@@ -684,204 +579,6 @@
             } else {
                 content.classList.add('hidden');
                 icon.textContent = '+';
-            }
-        }
-
-        // Payment redirect function
-        function redirectToPayment(packageType) {
-            showPaymentPage(packageType);
-        }
-
-        // Show payment page
-        function showPaymentPage(packageType) {
-            const packageNames = {
-                'starter': '🌱 Starter',
-                'standard': '⭐ Standard',
-                'premium': '💎 Premium',
-                'business': '🏢 Business',
-                'enterprise': '🚀 Enterprise'
-            };
-
-            const packagePrices = {
-                'starter': '49 zł',
-                'standard': '99 zł',
-                'premium': '199 zł',
-                'business': '399 zł',
-                'enterprise': '999 zł'
-            };
-
-            const paymentHTML = `
-                <div class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
-                    <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4">
-                        <div class="text-center mb-6">
-                            <h2 class="text-2xl font-bold text-gray-900 mb-2">💳 Wybierz sposób płatności</h2>
-                            <div class="bg-gray-50 rounded-lg p-4 mb-4">
-                                <h3 class="font-semibold text-lg">${packageNames[packageType]}</h3>
-                                <p class="text-2xl font-bold text-black">${packagePrices[packageType]}</p>
-                            </div>
-                        </div>
-                        
-                        <div class="space-y-4">
-                            <button onclick="processPayment('${packageType}', 'blik')" class="w-full bg-black text-white py-4 px-6 rounded-lg font-semibold hover:bg-gray-800 transition-colors flex items-center justify-center">
-                                📱 Płać BLIK
-                            </button>
-                            
-                            <button onclick="processPayment('${packageType}', 'transfer')" class="w-full bg-gray-100 text-black py-4 px-6 rounded-lg font-semibold hover:bg-gray-200 transition-colors flex items-center justify-center border-2 border-black">
-                                🏦 Przelew bankowy
-                            </button>
-                        </div>
-                        
-                        <button onclick="closePaymentPage()" class="w-full mt-6 text-gray-500 hover:text-gray-700 py-2">
-                            ← Powrót do pakietów
-                        </button>
-                    </div>
-                </div>
-            `;
-            
-            const paymentModal = document.createElement('div');
-            paymentModal.id = 'payment-modal';
-            paymentModal.innerHTML = paymentHTML;
-            document.body.appendChild(paymentModal);
-        }
-
-        // Process payment
-        function processPayment(packageType, paymentMethod) {
-            const packageNames = {
-                'starter': '🌱 Starter',
-                'standard': '⭐ Standard',
-                'premium': '💎 Premium',
-                'business': '🏢 Business',
-                'enterprise': '🚀 Enterprise'
-            };
-
-            const packagePrices = {
-                'starter': '49 zł',
-                'standard': '99 zł',
-                'premium': '199 zł',
-                'business': '399 zł',
-                'enterprise': '999 zł'
-            };
-
-            let paymentHTML = '';
-            
-            if (paymentMethod === 'blik') {
-                paymentHTML = `
-                    <div class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
-                        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4">
-                            <div class="text-center mb-6">
-                                <h2 class="text-2xl font-bold text-gray-900 mb-2">📱 Płatność BLIK</h2>
-                                <div class="bg-gray-50 rounded-lg p-4 mb-4">
-                                    <h3 class="font-semibold text-lg">${packageNames[packageType]}</h3>
-                                    <p class="text-2xl font-bold text-black">${packagePrices[packageType]}</p>
-                                </div>
-                            </div>
-                            
-                            <div class="space-y-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Kod BLIK (6 cyfr)</label>
-                                    <input type="text" maxlength="6" placeholder="000000" class="w-full px-4 py-3 border border-gray-300 rounded-lg text-center text-2xl font-mono focus:ring-2 focus:ring-black focus:border-transparent">
-                                </div>
-                                
-                                <button onclick="completeBlikPayment('${packageType}')" class="w-full bg-black text-white py-4 px-6 rounded-lg font-semibold hover:bg-gray-800 transition-colors">
-                                    ✅ Zapłać ${packagePrices[packageType]}
-                                </button>
-                            </div>
-                            
-                            <button onclick="closePaymentPage()" class="w-full mt-6 text-gray-500 hover:text-gray-700 py-2">
-                                ← Powrót
-                            </button>
-                        </div>
-                    </div>
-                `;
-            } else if (paymentMethod === 'transfer') {
-                paymentHTML = `
-                    <div class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
-                        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4">
-                            <div class="text-center mb-6">
-                                <h2 class="text-2xl font-bold text-gray-900 mb-2">🏦 Przelew bankowy</h2>
-                                <div class="bg-gray-50 rounded-lg p-4 mb-4">
-                                    <h3 class="font-semibold text-lg">${packageNames[packageType]}</h3>
-                                    <p class="text-2xl font-bold text-black">${packagePrices[packageType]}</p>
-                                </div>
-                            </div>
-                            
-                            <div class="bg-gray-50 rounded-lg p-4 mb-6 text-sm">
-                                <h3 class="font-semibold mb-3">Dane do przelewu:</h3>
-                                <div class="space-y-2">
-                                    <div><strong>Odbiorca:</strong> E-book Pro Sp. z o.o.</div>
-                                    <div><strong>Numer konta:</strong> 12 3456 7890 1234 5678 9012 3456</div>
-                                    <div><strong>Kwota:</strong> ${packagePrices[packageType]}</div>
-                                    <div><strong>Tytuł:</strong> Pakiet ${packageNames[packageType]} - ${Date.now()}</div>
-                                </div>
-                            </div>
-                            
-                            <button onclick="completeTransferPayment('${packageType}')" class="w-full bg-black text-white py-4 px-6 rounded-lg font-semibold hover:bg-gray-800 transition-colors">
-                                ✅ Potwierdzam przelew
-                            </button>
-                            
-                            <button onclick="closePaymentPage()" class="w-full mt-6 text-gray-500 hover:text-gray-700 py-2">
-                                ← Powrót
-                            </button>
-                        </div>
-                    </div>
-                `;
-            }
-            
-            document.getElementById('payment-modal').innerHTML = paymentHTML;
-        }
-
-        // Complete BLIK payment
-        function completeBlikPayment(packageType) {
-            const blikCode = document.querySelector('input[maxlength="6"]').value;
-            if (blikCode.length !== 6) {
-                alert('Wprowadź 6-cyfrowy kod BLIK');
-                return;
-            }
-            
-            showPaymentSuccess(packageType, 'BLIK');
-        }
-
-        // Complete transfer payment
-        function completeTransferPayment(packageType) {
-            showPaymentSuccess(packageType, 'Przelew bankowy');
-        }
-
-        // Show payment success
-        function showPaymentSuccess(packageType, paymentMethod) {
-            const packageNames = {
-                'starter': '🌱 Starter',
-                'standard': '⭐ Standard',
-                'premium': '💎 Premium',
-                'business': '🏢 Business',
-                'enterprise': '🚀 Enterprise'
-            };
-
-            const successHTML = `
-                <div class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
-                    <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 text-center">
-                        <div class="text-6xl mb-4">🎉</div>
-                        <h2 class="text-2xl font-bold text-gray-900 mb-4">Płatność zakończona!</h2>
-                        <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
-                            <p class="text-green-800 font-semibold">Pakiet: ${packageNames[packageType]}</p>
-                            <p class="text-green-600">Metoda: ${paymentMethod}</p>
-                            <p class="text-sm text-green-600 mt-2">Dostęp do e-booka zostanie aktywowany w ciągu 5 minut</p>
-                        </div>
-                        
-                        <button onclick="closePaymentPage()" class="w-full bg-black text-white py-4 px-6 rounded-lg font-semibold hover:bg-gray-800 transition-colors">
-                            🏠 Powrót do strony głównej
-                        </button>
-                    </div>
-                </div>
-            `;
-            
-            document.getElementById('payment-modal').innerHTML = successHTML;
-        }
-
-        // Close payment page
-        function closePaymentPage() {
-            const paymentModal = document.getElementById('payment-modal');
-            if (paymentModal) {
-                paymentModal.remove();
             }
         }
 
@@ -911,12 +608,44 @@
             }
         });
 
-        // Close modal when clicking outside
-        document.getElementById('edit-modal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeEditModal();
-            }
+        // Store original button text for error recovery
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.stripe-button').forEach(button => {
+                button.setAttribute('data-original-text', button.innerHTML);
+            });
         });
+
+        // Handle success/cancel pages if they don't exist
+        if (window.location.pathname === '/sukces') {
+            document.body.innerHTML = `
+                <div class="min-h-screen bg-green-50 flex items-center justify-center">
+                    <div class="text-center p-8">
+                        <div class="text-6xl mb-4">🎉</div>
+                        <h1 class="text-3xl font-bold text-green-800 mb-4">Płatność zakończona pomyślnie!</h1>
+                        <p class="text-green-600 mb-6">Dziękujemy za zakup! Dostęp do e-booka zostanie wysłany na Twój email w ciągu 5 minut.</p>
+                        <a href="/" class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors">
+                            Powrót do strony głównej
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
+
+        if (window.location.pathname === '/anulowano') {
+            document.body.innerHTML = `
+                <div class="min-h-screen bg-gray-50 flex items-center justify-center">
+                    <div class="text-center p-8">
+                        <div class="text-6xl mb-4">😔</div>
+                        <h1 class="text-3xl font-bold text-gray-800 mb-4">Płatność została anulowana</h1>
+                        <p class="text-gray-600 mb-6">Nie martw się! Możesz spróbować ponownie w każdej chwili.</p>
+                        <a href="/#cennik" class="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors">
+                            Powrót do pakietów
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96c8307212e3eead',t:'MTc1NDc1MjMyMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96c85413b5d03bc4',t:'MTc1NDc1Mzc3OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
+
