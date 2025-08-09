@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-book - Profesjonalne Pakiety</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #000000 0%, #1f1f1f 100%); }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-8px); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
+        .pricing-card { background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%); }
+        .premium-card { background: linear-gradient(145deg, #000000 0%, #1f1f1f 100%); }
+        .feature-icon { background: linear-gradient(135deg, #000000 0%, #333333 100%); }
+        .scroll-smooth { scroll-behavior: smooth; }
+    </style>
+</head>
+<body class="bg-gray-50 scroll-smooth">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold text-gray-900">📚 E-book Pro</h1>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#funkcje" class="text-gray-700 hover:text-black px-3 py-2 text-sm font-medium transition-colors">Funkcje</a>
+                        <a href="#cennik" class="text-gray-700 hover:text-black px-3 py-2 text-sm font-medium transition-colors">Cennik</a>
+                        <a href="#faq" class="text-gray-700 hover:text-black px-3 py-2 text-sm font-medium transition-colors">FAQ</a>
+                        <button onclick="toggleEditMode()" id="edit-toggle" class="bg-black text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors">
+                            ✏️ Tryb Edycji
+                        </button>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button onclick="toggleMobileMenu()" class="text-gray-700 hover:text-blue-600">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#funkcje" class="block px-3 py-2 text-gray-700 hover:text-black">Funkcje</a>
+                <a href="#cennik" class="block px-3 py-2 text-gray-700 hover:text-black">Cennik</a>
+                <a href="#faq" class="block px-3 py-2 text-gray-700 hover:text-black">FAQ</a>
+                <button onclick="toggleEditMode()" class="block w-full text-left px-3 py-2 text-black font-medium">✏️ Tryb Edycji</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white pt-24 pb-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-5xl md:text-6xl font-bold mb-6">
+                Odkryj Moc <span class="text-yellow-300">E-booka</span>
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 text-blue-100 max-w-3xl mx-auto">
+                Profesjonalne pakiety edukacyjne dostosowane do Twoich potrzeb. Wybierz swój poziom i zacznij już dziś!
+            </p>
+            <a href="#cennik" class="inline-block bg-white text-black px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transform hover:scale-105 transition-all duration-200">
+                Zobacz Pakiety 🚀
+            </a>
+        </div>
+    </section>
+
+    <!-- Funkcje Section -->
+    <section id="funkcje" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">⚡ Funkcje E-booka</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Odkryj wszystkie możliwości, które oferuje nasz e-book
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="text-center p-8 rounded-2xl bg-gray-50 card-hover">
+                    <div class="feature-icon w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl text-white">📖</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Interaktywne Treści</h3>
+                    <p class="text-gray-600">Dynamiczne elementy, quizy i ćwiczenia praktyczne dla lepszego zrozumienia materiału.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="text-center p-8 rounded-2xl bg-gray-50 card-hover">
+                    <div class="feature-icon w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl text-white">📱</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Dostęp Mobilny</h3>
+                    <p class="text-gray-600">Czytaj na telefonie, tablecie lub komputerze. Synchronizacja postępów między urządzeniami.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="text-center p-8 rounded-2xl bg-gray-50 card-hover">
+                    <div class="feature-icon w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl text-white">🎯</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Spersonalizowane Ścieżki</h3>
+                    <p class="text-gray-600">Dostosuj tempo nauki do swoich potrzeb. Różne poziomy trudności i specjalizacje.</p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="text-center p-8 rounded-2xl bg-gray-50 card-hover">
+                    <div class="feature-icon w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl text-white">💬</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Wsparcie Społeczności</h3>
+                    <p class="text-gray-600">Dołącz do grupy uczących się. Forum, webinary i bezpośredni kontakt z ekspertami.</p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="text-center p-8 rounded-2xl bg-gray-50 card-hover">
+                    <div class="feature-icon w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl text-white">📊</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Śledzenie Postępów</h3>
+                    <p class="text-gray-600">Monitoruj swoje osiągnięcia, otrzymuj certyfikaty i odznaki za ukończone moduły.</p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="text-center p-8 rounded-2xl bg-gray-50 card-hover">
+                    <div class="feature-icon w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl text-white">🔄</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Aktualizacje Dożywotnie</h3>
+                    <p class="text-gray-600">Otrzymuj najnowsze treści i aktualizacje bez dodatkowych opłat przez cały czas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cennik Section -->
+    <section id="cennik" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">💰 Wybierz Swój Pakiet</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Dostosowane opcje dla każdego poziomu zaawansowania i budżetu
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+                <!-- Pakiet Starter -->
+                <div class="pricing-card rounded-2xl p-8 border border-gray-200 card-hover relative" id="package-starter">
+                    <!-- Edit Button -->
+                    <button onclick="editPackage('starter')" class="edit-btn absolute top-4 right-4 bg-yellow-500 text-white p-2 rounded-full hover:bg-yellow-600 transition-colors hidden">
+                        ✏️
+                    </button>
+                    
+                    <div class="text-center">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2 editable" data-field="title">🌱 Starter</h3>
+                        <div class="text-3xl font-bold text-blue-600 mb-4 editable" data-field="price">49 zł</div>
+                        <p class="text-gray-600 mb-6 editable" data-field="description">Idealne na początek</p>
+                        
+                        <ul class="text-left space-y-3 mb-8" id="features-starter">
+                            <li class="flex items-center text-sm">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span class="editable" data-field="feature1">E-book podstawowy (100 stron)</span>
+                            </li>
+                            <li class="flex items-center text-sm">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span class="editable" data-field="feature2">5 ćwiczeń praktycznych</span>
+                            </li>
+                            <li class="flex items-center text-sm">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span class="editable" data-field="feature3">Dostęp na 6 miesięcy</span>
+                            </li>
+                            <li class="flex items-center text-sm">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span class="editable" data-field="feature4">Wsparcie email</span>
+                            </li>
+                        </ul>
+                        
+                        <button onclick="redirectToPayment('starter')" class="w-full bg-black text-white py-3 px-6 rounded-lg font-semibold hover:bg-gray-800 transform hover:scale-105 transition-all duration-200">
+                            Wybieram Starter
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Pakiet Standard -->
+                <div class="pricing-card rounded-2xl p-8 border border-gray-200 card-hover relative" id="package-standard">
+                    <!-- Edit Button -->
+                    <button onclick="editPackage('standard')" class="edit-btn absolute top-4 right-4 bg-yellow-500 text-white p-2 rounded-full hover:bg-yellow-600 transition-colors hidden">
+                        ✏️
+                    </button>
+                    
+                    <div class="text-center">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2 editable" data-field="title">⭐ Standard</h3>
+                        <div class="text-3xl font-bold text-blue-600 mb-4 editable" data-field="price">99 zł</div>
+                        <p class="text-gray-600 mb-6 editable" data-field="description">Najpopularniejszy wybór</p>
+                        
+                        <ul class="text-left space-y-3 mb-8" id="features-standard">
+                            <li class="flex items-center text-sm">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span class="editable" data-field="feature1">E-book rozszerzony (200 stron)</span>
+                            </li>
+                            <li class="flex items-center text-sm">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span class="editable" data-field="feature2">15 ćwiczeń + quizy</span>
+                            </li>
+                            <li class="flex items-center text-sm">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span class="editable" data-field="feature3">Dostęp na 12 miesięcy</span>
+                            </li>
+                            <li class="flex items-center text-sm">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span class="editable" data-field="feature4">Wsparcie priorytetowe</span>
+                            </li>
+                            <li class="flex items-center text-sm">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span class="editable" data-field="feature5">Bonus: 3 webinary</span>
+                            </li>
+                        </ul>
+                        
+                        <button onclick="redirectToPayment('standard')" class="w-full bg-black text-white py-3 px-6 rounded-lg font-semibold hover:bg-gray-800 transform hover:scale-105 transition-all duration-200">
+                            Wybieram Standard
+                        </button>
+                    </div>
+                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-orange-500 text-white px-4 py-1 rounded-full text-xs font-semibold">
+                        POPULARNE
+                    </div>
+                </div>
+
+                <!-- Pakiet Premium -->
+                <div class="premium-card rounded-2xl p-8 border-2 border-blue-500 card-hover relative text-white" id="package-premium">
+                    <!-- Edit Button -->
+                    <button onclick="editPackage('premium')" class="edit-btn absolute top-4 right-4 bg-yellow-500 text-white p-2 rounded-full hover:bg-yellow-600 transition-colors hidden">
+                        ✏️
+                    </button>
+                    
+                    <div class="text-center">
+                        <h3 class="text-xl font-bold mb-2 editable" data-field="title">💎 Premium</h3>
+                        <div class="text-3xl font-bold mb-4 editable" data-field="price">199 zł</div>
+                        <p class="text-blue-100 mb-6 editable" data-field="description">Dla wymagających</p>
+                        
+                        <ul class="text-left space-y-3 mb-8" id="features-premium">
+                            <li class="flex items-center text-sm">
+                                <span class="text-yellow-300 mr-2">✓</span>
+                                <span class="editable" data-field="feature1">E-book kompletny (350 stron)</span>
+                            </li>
+                            <li class="flex items-center text-sm">
+                                <span class="text-yellow-300 mr-2">✓</span>
+                                <span class="editable" data-field="feature2">30 ćwiczeń + projekty</span>
+                            </li>
+                            <li class="flex items-center text-sm">
+                                <span class="text-yellow-300 mr-2">✓</span>
+                                <span class="editable" data-field="feature3">Dostęp dożywotni</span>
+                            </li>
+                            <li class="flex items-center text-sm">
+                                <span class="text-yellow-300 mr-2">✓</span>
+                                <span class="editable" data-field="feature4">Wsparcie 1-na-1</span>
+                            </li>
+                            <li class="flex items-center text-sm">
+                                <span class="text-yellow-300 mr-2">✓</span>
+                                <span class="editable" data-field="feature5">Bonus: 10 webinarów</span>
+                            </li>
+                            <li class="flex items-center text-sm">
+                                <span class="text-yellow-300 mr-2">✓</span>
+                                <span class="editable" data-field="feature6">Certyfikat ukończenia</span>
+                            </li>
+                        </ul>
+                        
+                        <button onclick="redirectToPayment('premium')" class="w-full bg-white text-black py-3 px-6 rounded-lg font-semibold hover:bg-gray-100 transform hover:scale-105 transition-all duration-200">
+                            Wybieram Premium
+                        </button>
+                    </div>
+                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-yellow-500 text-black px-4 py-1 rounded-full text-xs font-semibold">
+                        NAJLEPSZA WARTOŚĆ
+                    </div>
+                </div>
+
+                <!-- Pakiet Business -->
+                <div class="pricing-card rounded-2xl p-8 border border-gray-200 card-hover relative" id="package-business">
+                    <!-- Edit Button -->
+                    <button onclick="editPackage('business')" class="edit-btn absolute top-4 right-4 bg-yellow-500 text-white p-2 rounded-full hover:bg-yellow-600 transition-colors hidden">
+                        ✏️
+                    </button>
+                    
+                    <div class="text-center">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2 editable" data-field="title">🏢 Business</h3>
+                        <div class="text-3xl font-bold text-blue-600 mb-4 editable" data-field="price">399 zł</div>
+                        <p class="text-gray-600 mb-6 editable" data-field="description">Dla firm i zespołów</p>
+                        
+                        <ul class="text-left space-y-3 mb-8" id="features-business">
+                            <li class="flex items-center text-sm">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span class="editable" data-field="feature1">Wszystko z Premium</span>
+                            </li>
+                            <li class="flex items-center text-sm">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span class="editable" data-field="feature2">Licencja dla 5 osób</span>
+                            </li>
+                            <li class="flex items-center text-sm">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span class="editable" data-field="feature3">Panel administracyjny</span>
+                            </li>
+                            <li class="flex items-center text-sm">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span class="editable" data-field="feature4">Raportowanie postępów</span>
+                            </li>
+                            <li class="flex items-center text-sm">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span class="editable" data-field="feature5">Dedykowany opiekun</span>
+                            </li>
+                        </ul>
+                        
+                        <button onclick="redirectToPayment('business')" class="w-full bg-black text-white py-3 px-6 rounded-lg font-semibold hover:bg-gray-800 transform hover:scale-105 transition-all duration-200">
+                            Wybieram Business
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Pakiet Enterprise -->
+                <div class="pricing-card rounded-2xl p-8 border border-gray-200 card-hover relative" id="package-enterprise">
+                    <!-- Edit Button -->
+                    <button onclick="editPackage('enterprise')" class="edit-btn absolute top-4 right-4 bg-yellow-500 text-white p-2 rounded-full hover:bg-yellow-600 transition-colors hidden">
+                        ✏️
+                    </button>
+                    
+                    <div class="text-center">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2 editable" data-field="title">🚀 Enterprise</h3>
+                        <div class="text-3xl font-bold text-blue-600 mb-4 editable" data-field="price">999 zł</div>
+                        <p class="text-gray-600 mb-6 editable" data-field="description">Rozwiązanie korporacyjne</p>
+                        
+                        <ul class="text-left space-y-3 mb-8" id="features-enterprise">
+                            <li class="flex items-center text-sm">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span class="editable" data-field="feature1">Wszystko z Business</span>
+                            </li>
+                            <li class="flex items-center text-sm">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span class="editable" data-field="feature2">Nieograniczona liczba użytkowników</span>
+                            </li>
+                            <li class="flex items-center text-sm">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span class="editable" data-field="feature3">Integracja z systemami HR</span>
+                            </li>
+                            <li class="flex items-center text-sm">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span class="editable" data-field="feature4">Szkolenia na miejscu</span>
+                            </li>
+                            <li class="flex items-center text-sm">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span class="editable" data-field="feature5">SLA 24/7</span>
+                            </li>
+                        </ul>
+                        
+                        <button onclick="redirectToPayment('enterprise')" class="w-full bg-black text-white py-3 px-6 rounded-lg font-semibold hover:bg-gray-800 transform hover:scale-105 transition-all duration-200">
+                            Wybieram Enterprise
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gwarancja -->
+            <div class="text-center mt-12">
+                <div class="inline-flex items-center bg-green-100 text-green-800 px-6 py-3 rounded-full">
+                    <span class="text-2xl mr-2">🛡️</span>
+                    <span class="font-semibold">30-dniowa gwarancja zwrotu pieniędzy</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">❓ Często Zadawane Pytania</h2>
+                <p class="text-xl text-gray-600">
+                    Znajdź odpowiedzi na najczęstsze pytania dotyczące naszego e-booka
+                </p>
+            </div>
+
+            <div class="space-y-6">
+                <!-- FAQ Item 1 -->
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <button onclick="toggleFAQ(1)" class="flex justify-between items-center w-full text-left">
+                        <h3 class="text-lg font-semibold text-gray-900">Jak długo mam dostęp do e-booka?</h3>
+                        <span id="faq-icon-1" class="text-black text-xl">+</span>
+                    </button>
+                    <div id="faq-content-1" class="hidden mt-4 text-gray-600">
+                        <p>Dostęp zależy od wybranego pakietu: Starter - 6 miesięcy, Standard - 12 miesięcy, Premium i wyższe - dostęp dożywotni. Możesz zawsze przedłużyć dostęp lub przejść na wyższy pakiet.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <button onclick="toggleFAQ(2)" class="flex justify-between items-center w-full text-left">
+                        <h3 class="text-lg font-semibold text-gray-900">Czy mogę zmienić pakiet po zakupie?</h3>
+                        <span id="faq-icon-2" class="text-black text-xl">+</span>
+                    </button>
+                    <div id="faq-content-2" class="hidden mt-4 text-gray-600">
+                        <p>Tak! Możesz w każdej chwili przejść na wyższy pakiet, dopłacając jedynie różnicę w cenie. Kontakt z naszym zespołem obsługi klienta załatwi sprawę w ciągu 24 godzin.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <button onclick="toggleFAQ(3)" class="flex justify-between items-center w-full text-left">
+                        <h3 class="text-lg font-semibold text-gray-900">Jakie formy płatności akceptujecie?</h3>
+                        <span id="faq-icon-3" class="text-black text-xl">+</span>
+                    </button>
+                    <div id="faq-content-3" class="hidden mt-4 text-gray-600">
+                        <p>Akceptujemy wszystkie popularne metody płatności: karty kredytowe/debetowe (Visa, Mastercard), BLIK, przelewy bankowe, PayPal oraz płatności mobilne. Wszystkie transakcje są w 100% bezpieczne.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <button onclick="toggleFAQ(4)" class="flex justify-between items-center w-full text-left">
+                        <h3 class="text-lg font-semibold text-gray-900">Czy otrzymam fakturę VAT?</h3>
+                        <span id="faq-icon-4" class="text-black text-xl">+</span>
+                    </button>
+                    <div id="faq-content-4" class="hidden mt-4 text-gray-600">
+                        <p>Oczywiście! Każdy zakup jest automatycznie dokumentowany fakturą VAT, którą otrzymasz na podany adres email zaraz po dokonaniu płatności. Dla firm wystawiamy faktury z odpowiednimi danymi.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 5 -->
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <button onclick="toggleFAQ(5)" class="flex justify-between items-center w-full text-left">
+                        <h3 class="text-lg font-semibold text-gray-900">Co jeśli e-book mi się nie spodoba?</h3>
+                        <span id="faq-icon-5" class="text-black text-xl">+</span>
+                    </button>
+                    <div id="faq-content-5" class="hidden mt-4 text-gray-600">
+                        <p>Oferujemy 30-dniową gwarancję zwrotu pieniędzy bez podawania przyczyny. Jeśli z jakiegokolwiek powodu nie jesteś zadowolony, po prostu skontaktuj się z nami, a zwrócimy Ci pełną kwotę.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 6 -->
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <button onclick="toggleFAQ(6)" class="flex justify-between items-center w-full text-left">
+                        <h3 class="text-lg font-semibold text-gray-900">Czy mogę udostępnić e-book innym osobom?</h3>
+                        <span id="faq-icon-6" class="text-black text-xl">+</span>
+                    </button>
+                    <div id="faq-content-6" class="hidden mt-4 text-gray-600">
+                        <p>E-book jest przeznaczony do użytku osobistego. Dla zespołów i firm oferujemy specjalne pakiety Business i Enterprise z licencjami wielostanowiskowymi. Udostępnianie bez licencji narusza nasze warunki użytkowania.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">📚 E-book Pro</h3>
+                    <p class="text-gray-400">Profesjonalne materiały edukacyjne dla każdego poziomu zaawansowania.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Produkty</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">E-book Starter</a></li>
+                        <li><a href="#" class="hover:text-white">E-book Premium</a></li>
+                        <li><a href="#" class="hover:text-white">Pakiety Business</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Wsparcie</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">Centrum Pomocy</a></li>
+                        <li><a href="#" class="hover:text-white">Kontakt</a></li>
+                        <li><a href="#" class="hover:text-white">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Kontakt</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>📧 kontakt@ebook-pro.pl</li>
+                        <li>📞 +48 123 456 789</li>
+                        <li>🏢 ul. Przykładowa 123, Warszawa</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 E-book Pro. Wszystkie prawa zastrzeżone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Edit Modal -->
+    <div id="edit-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
+        <div class="bg-white rounded-2xl p-8 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-900">✏️ Edytuj Pakiet</h2>
+                <button onclick="closeEditModal()" class="text-gray-500 hover:text-gray-700 text-2xl">×</button>
+            </div>
+            
+            <form id="edit-form" class="space-y-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Nazwa pakietu</label>
+                    <input type="text" id="edit-title" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Cena</label>
+                    <input type="text" id="edit-price" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Opis</label>
+                    <input type="text" id="edit-description" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Funkcje</label>
+                    <div id="edit-features" class="space-y-3">
+                        <!-- Features will be dynamically added here -->
+                    </div>
+                    <button type="button" onclick="addFeature()" class="mt-3 text-blue-600 hover:text-blue-700 text-sm font-medium">+ Dodaj funkcję</button>
+                </div>
+                
+                <div class="flex gap-4">
+                    <button type="button" onclick="savePackage()" class="flex-1 bg-black text-white py-3 px-6 rounded-lg font-semibold hover:bg-gray-800 transition-colors">
+                        💾 Zapisz zmiany
+                    </button>
+                    <button type="button" onclick="closeEditModal()" class="flex-1 bg-gray-300 text-gray-700 py-3 px-6 rounded-lg font-semibold hover:bg-gray-400 transition-colors">
+                        ❌ Anuluj
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let isEditMode = false;
+        let currentEditPackage = null;
+
+        // Toggle edit mode
+        function toggleEditMode() {
+            isEditMode = !isEditMode;
+            const editButtons = document.querySelectorAll('.edit-btn');
+            const toggleButton = document.getElementById('edit-toggle');
+            
+            if (isEditMode) {
+                editButtons.forEach(btn => btn.classList.remove('hidden'));
+                toggleButton.textContent = '👁️ Tryb Podglądu';
+                toggleButton.classList.remove('bg-black', 'hover:bg-gray-800');
+                toggleButton.classList.add('bg-gray-600', 'hover:bg-gray-700');
+                
+                // Add visual indicators
+                document.querySelectorAll('.editable').forEach(el => {
+                    el.classList.add('ring-2', 'ring-yellow-300', 'ring-opacity-50');
+                });
+            } else {
+                editButtons.forEach(btn => btn.classList.add('hidden'));
+                toggleButton.textContent = '✏️ Tryb Edycji';
+                toggleButton.classList.remove('bg-gray-600', 'hover:bg-gray-700');
+                toggleButton.classList.add('bg-black', 'hover:bg-gray-800');
+                
+                // Remove visual indicators
+                document.querySelectorAll('.editable').forEach(el => {
+                    el.classList.remove('ring-2', 'ring-yellow-300', 'ring-opacity-50');
+                });
+            }
+        }
+
+        // Edit package
+        function editPackage(packageType) {
+            currentEditPackage = packageType;
+            const packageElement = document.getElementById(`package-${packageType}`);
+            
+            // Get current values
+            const title = packageElement.querySelector('[data-field="title"]').textContent;
+            const price = packageElement.querySelector('[data-field="price"]').textContent;
+            const description = packageElement.querySelector('[data-field="description"]').textContent;
+            
+            // Fill form
+            document.getElementById('edit-title').value = title;
+            document.getElementById('edit-price').value = price;
+            document.getElementById('edit-description').value = description;
+            
+            // Get features
+            const featuresContainer = document.getElementById('edit-features');
+            featuresContainer.innerHTML = '';
+            
+            const features = packageElement.querySelectorAll('[data-field^="feature"]');
+            features.forEach((feature, index) => {
+                addFeatureInput(feature.textContent, index + 1);
+            });
+            
+            // Show modal
+            document.getElementById('edit-modal').classList.remove('hidden');
+        }
+
+        // Add feature input
+        function addFeatureInput(value = '', featureNumber = null) {
+            const featuresContainer = document.getElementById('edit-features');
+            const featureCount = featuresContainer.children.length + 1;
+            const actualNumber = featureNumber || featureCount;
+            
+            const featureDiv = document.createElement('div');
+            featureDiv.className = 'flex gap-2';
+            featureDiv.innerHTML = `
+                <input type="text" value="${value}" class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Funkcja ${actualNumber}">
+                <button type="button" onclick="removeFeature(this)" class="px-3 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors">🗑️</button>
+            `;
+            featuresContainer.appendChild(featureDiv);
+        }
+
+        // Add new feature
+        function addFeature() {
+            addFeatureInput();
+        }
+
+        // Remove feature
+        function removeFeature(button) {
+            button.parentElement.remove();
+        }
+
+        // Save package changes
+        function savePackage() {
+            if (!currentEditPackage) return;
+            
+            const packageElement = document.getElementById(`package-${currentEditPackage}`);
+            
+            // Update title
+            const title = document.getElementById('edit-title').value;
+            packageElement.querySelector('[data-field="title"]').textContent = title;
+            
+            // Update price
+            const price = document.getElementById('edit-price').value;
+            packageElement.querySelector('[data-field="price"]').textContent = price;
+            
+            // Update description
+            const description = document.getElementById('edit-description').value;
+            packageElement.querySelector('[data-field="description"]').textContent = description;
+            
+            // Update features
+            const featureInputs = document.querySelectorAll('#edit-features input');
+            const featureElements = packageElement.querySelectorAll('[data-field^="feature"]');
+            
+            featureInputs.forEach((input, index) => {
+                if (featureElements[index] && input.value.trim()) {
+                    featureElements[index].textContent = input.value.trim();
+                }
+            });
+            
+            // Show success message
+            const successMsg = document.createElement('div');
+            successMsg.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+            successMsg.textContent = '✅ Pakiet został zaktualizowany!';
+            document.body.appendChild(successMsg);
+            
+            setTimeout(() => {
+                successMsg.remove();
+            }, 3000);
+            
+            closeEditModal();
+        }
+
+        // Close edit modal
+        function closeEditModal() {
+            document.getElementById('edit-modal').classList.add('hidden');
+            currentEditPackage = null;
+        }
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // FAQ toggle
+        function toggleFAQ(index) {
+            const content = document.getElementById(`faq-content-${index}`);
+            const icon = document.getElementById(`faq-icon-${index}`);
+            
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.textContent = '−';
+            } else {
+                content.classList.add('hidden');
+                icon.textContent = '+';
+            }
+        }
+
+        // Payment redirect function
+        function redirectToPayment(packageType) {
+            showPaymentPage(packageType);
+        }
+
+        // Show payment page
+        function showPaymentPage(packageType) {
+            const packageNames = {
+                'starter': '🌱 Starter',
+                'standard': '⭐ Standard',
+                'premium': '💎 Premium',
+                'business': '🏢 Business',
+                'enterprise': '🚀 Enterprise'
+            };
+
+            const packagePrices = {
+                'starter': '49 zł',
+                'standard': '99 zł',
+                'premium': '199 zł',
+                'business': '399 zł',
+                'enterprise': '999 zł'
+            };
+
+            const paymentHTML = `
+                <div class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+                    <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4">
+                        <div class="text-center mb-6">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-2">💳 Wybierz sposób płatności</h2>
+                            <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                                <h3 class="font-semibold text-lg">${packageNames[packageType]}</h3>
+                                <p class="text-2xl font-bold text-black">${packagePrices[packageType]}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <button onclick="processPayment('${packageType}', 'blik')" class="w-full bg-black text-white py-4 px-6 rounded-lg font-semibold hover:bg-gray-800 transition-colors flex items-center justify-center">
+                                📱 Płać BLIK
+                            </button>
+                            
+                            <button onclick="processPayment('${packageType}', 'transfer')" class="w-full bg-gray-100 text-black py-4 px-6 rounded-lg font-semibold hover:bg-gray-200 transition-colors flex items-center justify-center border-2 border-black">
+                                🏦 Przelew bankowy
+                            </button>
+                        </div>
+                        
+                        <button onclick="closePaymentPage()" class="w-full mt-6 text-gray-500 hover:text-gray-700 py-2">
+                            ← Powrót do pakietów
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            const paymentModal = document.createElement('div');
+            paymentModal.id = 'payment-modal';
+            paymentModal.innerHTML = paymentHTML;
+            document.body.appendChild(paymentModal);
+        }
+
+        // Process payment
+        function processPayment(packageType, paymentMethod) {
+            const packageNames = {
+                'starter': '🌱 Starter',
+                'standard': '⭐ Standard',
+                'premium': '💎 Premium',
+                'business': '🏢 Business',
+                'enterprise': '🚀 Enterprise'
+            };
+
+            const packagePrices = {
+                'starter': '49 zł',
+                'standard': '99 zł',
+                'premium': '199 zł',
+                'business': '399 zł',
+                'enterprise': '999 zł'
+            };
+
+            let paymentHTML = '';
+            
+            if (paymentMethod === 'blik') {
+                paymentHTML = `
+                    <div class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+                        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4">
+                            <div class="text-center mb-6">
+                                <h2 class="text-2xl font-bold text-gray-900 mb-2">📱 Płatność BLIK</h2>
+                                <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                                    <h3 class="font-semibold text-lg">${packageNames[packageType]}</h3>
+                                    <p class="text-2xl font-bold text-black">${packagePrices[packageType]}</p>
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Kod BLIK (6 cyfr)</label>
+                                    <input type="text" maxlength="6" placeholder="000000" class="w-full px-4 py-3 border border-gray-300 rounded-lg text-center text-2xl font-mono focus:ring-2 focus:ring-black focus:border-transparent">
+                                </div>
+                                
+                                <button onclick="completeBlikPayment('${packageType}')" class="w-full bg-black text-white py-4 px-6 rounded-lg font-semibold hover:bg-gray-800 transition-colors">
+                                    ✅ Zapłać ${packagePrices[packageType]}
+                                </button>
+                            </div>
+                            
+                            <button onclick="closePaymentPage()" class="w-full mt-6 text-gray-500 hover:text-gray-700 py-2">
+                                ← Powrót
+                            </button>
+                        </div>
+                    </div>
+                `;
+            } else if (paymentMethod === 'transfer') {
+                paymentHTML = `
+                    <div class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+                        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4">
+                            <div class="text-center mb-6">
+                                <h2 class="text-2xl font-bold text-gray-900 mb-2">🏦 Przelew bankowy</h2>
+                                <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                                    <h3 class="font-semibold text-lg">${packageNames[packageType]}</h3>
+                                    <p class="text-2xl font-bold text-black">${packagePrices[packageType]}</p>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-gray-50 rounded-lg p-4 mb-6 text-sm">
+                                <h3 class="font-semibold mb-3">Dane do przelewu:</h3>
+                                <div class="space-y-2">
+                                    <div><strong>Odbiorca:</strong> E-book Pro Sp. z o.o.</div>
+                                    <div><strong>Numer konta:</strong> 12 3456 7890 1234 5678 9012 3456</div>
+                                    <div><strong>Kwota:</strong> ${packagePrices[packageType]}</div>
+                                    <div><strong>Tytuł:</strong> Pakiet ${packageNames[packageType]} - ${Date.now()}</div>
+                                </div>
+                            </div>
+                            
+                            <button onclick="completeTransferPayment('${packageType}')" class="w-full bg-black text-white py-4 px-6 rounded-lg font-semibold hover:bg-gray-800 transition-colors">
+                                ✅ Potwierdzam przelew
+                            </button>
+                            
+                            <button onclick="closePaymentPage()" class="w-full mt-6 text-gray-500 hover:text-gray-700 py-2">
+                                ← Powrót
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            document.getElementById('payment-modal').innerHTML = paymentHTML;
+        }
+
+        // Complete BLIK payment
+        function completeBlikPayment(packageType) {
+            const blikCode = document.querySelector('input[maxlength="6"]').value;
+            if (blikCode.length !== 6) {
+                alert('Wprowadź 6-cyfrowy kod BLIK');
+                return;
+            }
+            
+            showPaymentSuccess(packageType, 'BLIK');
+        }
+
+        // Complete transfer payment
+        function completeTransferPayment(packageType) {
+            showPaymentSuccess(packageType, 'Przelew bankowy');
+        }
+
+        // Show payment success
+        function showPaymentSuccess(packageType, paymentMethod) {
+            const packageNames = {
+                'starter': '🌱 Starter',
+                'standard': '⭐ Standard',
+                'premium': '💎 Premium',
+                'business': '🏢 Business',
+                'enterprise': '🚀 Enterprise'
+            };
+
+            const successHTML = `
+                <div class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+                    <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 text-center">
+                        <div class="text-6xl mb-4">🎉</div>
+                        <h2 class="text-2xl font-bold text-gray-900 mb-4">Płatność zakończona!</h2>
+                        <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+                            <p class="text-green-800 font-semibold">Pakiet: ${packageNames[packageType]}</p>
+                            <p class="text-green-600">Metoda: ${paymentMethod}</p>
+                            <p class="text-sm text-green-600 mt-2">Dostęp do e-booka zostanie aktywowany w ciągu 5 minut</p>
+                        </div>
+                        
+                        <button onclick="closePaymentPage()" class="w-full bg-black text-white py-4 px-6 rounded-lg font-semibold hover:bg-gray-800 transition-colors">
+                            🏠 Powrót do strony głównej
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('payment-modal').innerHTML = successHTML;
+        }
+
+        // Close payment page
+        function closePaymentPage() {
+            const paymentModal = document.getElementById('payment-modal');
+            if (paymentModal) {
+                paymentModal.remove();
+            }
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+                // Close mobile menu if open
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+        // Add scroll effect to navigation
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('bg-white/95', 'backdrop-blur-sm');
+            } else {
+                nav.classList.remove('bg-white/95', 'backdrop-blur-sm');
+            }
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('edit-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeEditModal();
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96c8307212e3eead',t:'MTc1NDc1MjMyMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
