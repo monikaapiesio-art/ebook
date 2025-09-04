@@ -47,6 +47,7 @@
             <div class="px-2 pt-2 pb-3 space-y-1">
                 <a href="#funkcje" class="block px-3 py-2 text-gray-700 hover:text-black">Funkcje</a>
                 <a href="#cennik" class="block px-3 py-2 text-gray-700 hover:text-black">Cennik</a>
+                <a href="#kalkulator" class="block px-3 py-2 text-gray-700 hover:text-black">Kalkulator</a>
                 <a href="#faq" class="block px-3 py-2 text-gray-700 hover:text-black">FAQ</a>
 
             </div>
@@ -714,4 +715,304 @@
 
     </script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96c841e0624d3bc4',t:'MTc1NDc1MzAzNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Kaloryczny Pro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .input-focus:focus {
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen text-white">
+    <div class="container mx-auto px-4 py-8">
+        <div class="max-w-3xl mx-auto">
+            <!-- Header -->
+            <div class="text-center mb-8">
+                <h1 class="text-5xl font-bold mb-3 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                    Kalkulator Kaloryczny Pro
+                </h1>
+                <p class="text-gray-300 text-lg">Precyzyjne obliczenie zapotrzebowania kalorycznego z uwzględnieniem ETP</p>
+            </div>
+
+            <!-- Calculator Form -->
+            <div class="glass-effect rounded-3xl p-8 mb-8 card-hover transition-all duration-300">
+                <form id="calorieForm" class="space-y-8">
+                    <!-- Personal Info Section -->
+                    <div class="border-b border-gray-700 pb-6">
+                        <h3 class="text-xl font-semibold mb-4 text-white">📊 Dane podstawowe</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-2 text-gray-300">Wiek (lata)</label>
+                                <input type="number" id="age" min="15" max="100" 
+                                       class="w-full px-4 py-3 bg-black/30 border border-gray-600 rounded-lg text-white placeholder-gray-400 input-focus focus:border-white transition-all duration-200" 
+                                       placeholder="25" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2 text-gray-300">Wzrost (cm)</label>
+                                <input type="number" id="height" min="120" max="250" 
+                                       class="w-full px-4 py-3 bg-black/30 border border-gray-600 rounded-lg text-white placeholder-gray-400 input-focus focus:border-white transition-all duration-200" 
+                                       placeholder="175" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2 text-gray-300">Waga (kg)</label>
+                                <input type="number" id="weight" min="30" max="300" step="0.1" 
+                                       class="w-full px-4 py-3 bg-black/30 border border-gray-600 rounded-lg text-white placeholder-gray-400 input-focus focus:border-white transition-all duration-200" 
+                                       placeholder="70" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2 text-gray-300">ETP (%)</label>
+                                <input type="number" id="etp" min="5" max="15" step="0.5" 
+                                       class="w-full px-4 py-3 bg-black/30 border border-gray-600 rounded-lg text-white placeholder-gray-400 input-focus focus:border-white transition-all duration-200" 
+                                       placeholder="10" required>
+                                <div class="text-xs text-gray-400 mt-1">Efekt termiczny pożywienia</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gender Selection -->
+                    <div class="border-b border-gray-700 pb-6">
+                        <h3 class="text-xl font-semibold mb-4 text-white">👤 Płeć</h3>
+                        <div class="flex gap-4">
+                            <label class="flex items-center cursor-pointer">
+                                <input type="radio" name="gender" value="male" class="sr-only" required>
+                                <div class="gender-option flex items-center px-8 py-4 border border-gray-600 rounded-xl transition-all duration-200 hover:border-white hover:bg-white/5">
+                                    <span class="text-lg">👨 Mężczyzna</span>
+                                </div>
+                            </label>
+                            <label class="flex items-center cursor-pointer">
+                                <input type="radio" name="gender" value="female" class="sr-only" required>
+                                <div class="gender-option flex items-center px-8 py-4 border border-gray-600 rounded-xl transition-all duration-200 hover:border-white hover:bg-white/5">
+                                    <span class="text-lg">👩 Kobieta</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Activity Section -->
+                    <div class="border-b border-gray-700 pb-6">
+                        <h3 class="text-xl font-semibold mb-4 text-white">🏃‍♂️ Aktywność fizyczna</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium mb-3 text-gray-300">Liczba treningów w tygodniu</label>
+                                <select id="training" 
+                                        class="w-full px-4 py-3 bg-black/30 border border-gray-600 rounded-lg text-white input-focus focus:border-white transition-all duration-200" required>
+                                    <option value="">Wybierz liczbę treningów</option>
+                                    <option value="0">0 - Brak treningów</option>
+                                    <option value="1">1-2 - Lekka aktywność</option>
+                                    <option value="3">3-4 - Umiarkowana aktywność</option>
+                                    <option value="5">5-6 - Wysoka aktywność</option>
+                                    <option value="7">7+ - Bardzo wysoka aktywność</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-3 text-gray-300">Poziom NEAT</label>
+                                <select id="neat" 
+                                        class="w-full px-4 py-3 bg-black/30 border border-gray-600 rounded-lg text-white input-focus focus:border-white transition-all duration-200" required>
+                                    <option value="">Wybierz poziom NEAT</option>
+                                    <option value="low">Niski - Praca siedząca, mało ruchu</option>
+                                    <option value="moderate">Umiarkowany - Czasami chodzę, stoję</option>
+                                    <option value="high">Wysoki - Dużo chodzę, jestem aktywny</option>
+                                    <option value="very-high">Bardzo wysoki - Praca fizyczna</option>
+                                </select>
+                                <div class="text-xs text-gray-400 mt-1">Non-Exercise Activity Thermogenesis</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Calculate Button -->
+                    <div class="text-center">
+                        <button type="submit" 
+                                class="bg-white text-black font-bold py-4 px-12 rounded-xl hover:bg-gray-200 transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] text-lg">
+                            🧮 Oblicz zapotrzebowanie kaloryczne
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Results -->
+            <div id="results" class="glass-effect rounded-3xl p-8 hidden card-hover transition-all duration-300">
+                <h2 class="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                    Twoje zapotrzebowanie kaloryczne
+                </h2>
+                
+                <!-- Main Metrics -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-black/20 rounded-xl p-6 text-center border border-gray-700">
+                        <div class="text-sm text-gray-400 mb-2">BMR</div>
+                        <div class="text-sm text-gray-400 mb-2">(Podstawowa przemiana materii)</div>
+                        <div id="bmr" class="text-3xl font-bold text-white">-</div>
+                        <div class="text-xs text-gray-500 mt-2">kcal/dzień</div>
+                    </div>
+                    <div class="bg-black/20 rounded-xl p-6 text-center border border-gray-700">
+                        <div class="text-sm text-gray-400 mb-2">ETP</div>
+                        <div class="text-sm text-gray-400 mb-2">(Efekt termiczny pożywienia)</div>
+                        <div id="etpValue" class="text-3xl font-bold text-white">-</div>
+                        <div class="text-xs text-gray-500 mt-2">kcal/dzień</div>
+                    </div>
+                    <div class="bg-black/20 rounded-xl p-6 text-center border border-gray-700">
+                        <div class="text-sm text-gray-400 mb-2">TDEE</div>
+                        <div class="text-sm text-gray-400 mb-2">(Całkowite zapotrzebowanie)</div>
+                        <div id="tdee" class="text-4xl font-bold text-white">-</div>
+                        <div class="text-xs text-gray-500 mt-2">kcal/dzień</div>
+                    </div>
+                </div>
+
+                <!-- Goals Section -->
+                <div class="space-y-6">
+                    <h3 class="text-2xl font-semibold mb-6 text-center text-white">🎯 Cele żywieniowe</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-gradient-to-br from-red-900/30 to-red-800/20 border border-red-700/40 rounded-xl p-6 text-center">
+                            <div class="text-red-300 mb-2 font-medium">🔥 Redukcja</div>
+                            <div class="text-sm text-red-400 mb-3">Deficyt -500 kcal</div>
+                            <div id="deficit" class="text-2xl font-bold text-red-300">-</div>
+                            <div class="text-xs text-red-400 mt-2">kcal/dzień</div>
+                        </div>
+                        <div class="bg-gradient-to-br from-green-900/30 to-green-800/20 border border-green-700/40 rounded-xl p-6 text-center">
+                            <div class="text-green-300 mb-2 font-medium">⚖️ Utrzymanie</div>
+                            <div class="text-sm text-green-400 mb-3">Stabilna waga</div>
+                            <div id="maintenance" class="text-2xl font-bold text-green-300">-</div>
+                            <div class="text-xs text-green-400 mt-2">kcal/dzień</div>
+                        </div>
+                        <div class="bg-gradient-to-br from-blue-900/30 to-blue-800/20 border border-blue-700/40 rounded-xl p-6 text-center">
+                            <div class="text-blue-300 mb-2 font-medium">💪 Masa</div>
+                            <div class="text-sm text-blue-400 mb-3">Nadwyżka +300 kcal</div>
+                            <div id="surplus" class="text-2xl font-bold text-blue-300">-</div>
+                            <div class="text-xs text-blue-400 mt-2">kcal/dzień</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Info -->
+                <div class="mt-8 p-6 bg-black/20 rounded-xl border border-gray-700">
+                    <div class="text-center">
+                        <h4 class="text-lg font-semibold mb-3 text-white">📋 Szczegóły obliczeń</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                            <div class="text-gray-300">
+                                <span class="font-medium">Współczynnik aktywności:</span> 
+                                <span id="activityFactor" class="text-white">-</span>
+                            </div>
+                            <div class="text-gray-300">
+                                <span class="font-medium">Korekta NEAT:</span> 
+                                <span id="neatAdjustment" class="text-white">-</span> kcal
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 p-6 bg-white/5 rounded-xl border border-gray-700">
+                    <p class="text-sm text-gray-300 text-center leading-relaxed">
+                        💡 <strong class="text-white">Wskazówka:</strong> To są orientacyjne wartości oparte na wzorze Mifflin-St Jeor z uwzględnieniem ETP i NEAT. 
+                        Obserwuj swoją wagę i samopoczucie przez 2-3 tygodnie, aby dostosować kalorie do swoich indywidualnych potrzeb.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Gender selection styling
+        document.querySelectorAll('input[name="gender"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                document.querySelectorAll('.gender-option').forEach(option => {
+                    option.classList.remove('border-white', 'bg-white/10');
+                    option.classList.add('border-gray-600');
+                });
+                if (this.checked) {
+                    const option = this.nextElementSibling;
+                    option.classList.remove('border-gray-600');
+                    option.classList.add('border-white', 'bg-white/10');
+                }
+            });
+        });
+
+        // Form submission
+        document.getElementById('calorieForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const age = parseInt(document.getElementById('age').value);
+            const height = parseInt(document.getElementById('height').value);
+            const weight = parseFloat(document.getElementById('weight').value);
+            const etp = parseFloat(document.getElementById('etp').value);
+            const gender = document.querySelector('input[name="gender"]:checked').value;
+            const training = document.getElementById('training').value;
+            const neat = document.getElementById('neat').value;
+
+            // Calculate BMR using Mifflin-St Jeor equation
+            let bmr;
+            if (gender === 'male') {
+                bmr = (10 * weight) + (6.25 * height) - (5 * age) + 5;
+            } else {
+                bmr = (10 * weight) + (6.25 * height) - (5 * age) - 161;
+            }
+
+            // Activity multipliers based on training frequency
+            const trainingMultipliers = {
+                '0': 1.2,   // Sedentary
+                '1': 1.375, // Light activity
+                '3': 1.55,  // Moderate activity
+                '5': 1.725, // High activity
+                '7': 1.9    // Very high activity
+            };
+
+            // NEAT adjustments
+            const neatAdjustments = {
+                'low': -150,
+                'moderate': 0,
+                'high': 150,
+                'very-high': 300
+            };
+
+            // Calculate base TDEE without ETP
+            const baseMultiplier = trainingMultipliers[training];
+            const neatAdjustment = neatAdjustments[neat];
+            const baseTdee = (bmr * baseMultiplier) + neatAdjustment;
+
+            // Calculate ETP (Thermic Effect of Food)
+            const etpValue = Math.round(baseTdee * (etp / 100));
+            
+            // Final TDEE with ETP
+            const tdee = Math.round(baseTdee + etpValue);
+
+            // Calculate goals
+            const deficit = tdee - 500;
+            const maintenance = tdee;
+            const surplus = tdee + 300;
+
+            // Display results
+            document.getElementById('bmr').textContent = Math.round(bmr);
+            document.getElementById('etpValue').textContent = etpValue;
+            document.getElementById('tdee').textContent = tdee;
+            document.getElementById('deficit').textContent = deficit;
+            document.getElementById('maintenance').textContent = maintenance;
+            document.getElementById('surplus').textContent = surplus;
+            document.getElementById('activityFactor').textContent = baseMultiplier;
+            document.getElementById('neatAdjustment').textContent = neatAdjustment > 0 ? '+' + neatAdjustment : neatAdjustment;
+
+            // Show results with smooth animation
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.classList.remove('hidden');
+            resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'979df815369660c9',t:'MTc1Njk5Mzk2NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
